@@ -21,39 +21,43 @@ class ProductsService
 	}
 
 	async create(data) {
-    const newProduct = {
-      id: faker.datatype.uuid(),
-      ...data
-    }
-    this.products.push(newProduct)
-    return newProduct
-  }
+		const newProduct = {
+			id: faker.datatype.uuid(),
+			...data
+		}
+		this.products.push(newProduct)
+		return newProduct
+	}
 
-  find() {
-    return this.products
-  }
 
-  async findOne(id) {
-    return this.products.find(item => item.id === id)
-  }
+	async find() {
+		return new Promise((resolve, reject) => {
+			setTimeout(() => resolve(this.products), 2000)
+		})
+	}
 
-  async update(id, changes) {
-    const index = this.products.findIndex(item => item.id === id)
-    if( index === -1 ) throw new Error('product not found')
-    const product = this.products[index]
-    this.products[index] = {
-      ...product,
-      ...changes
-    };
-    return this.products[index];
-  }
 
-  async delete(id) {
-    const index = this.products.findIndex(item => item.id === id)
-    if( index === -1 ) throw new Error('product not found')
-    this.products.splice(index, 1)
-    return { id };
-  }
+	async findOne(id) {
+		return this.products.find(item => item.id === id)
+	}
+
+	async update(id, changes) {
+		const index = this.products.findIndex(item => item.id === id)
+		if( index === -1 ) throw new Error('product not found')
+		const product = this.products[index]
+		this.products[index] = {
+			...product,
+			...changes
+		};
+		return this.products[index];
+	}
+
+	async delete(id) {
+		const index = this.products.findIndex(item => item.id === id)
+		if( index === -1 ) throw new Error('product not found')
+		this.products.splice(index, 1)
+		return { id };
+	}
 }
 
 
