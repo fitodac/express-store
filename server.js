@@ -16,4 +16,4 @@ app.get('/nueva-ruta', (req, res) => {
 
 routerApi(app)
 
-module.exports = { app }
+module.exports = app
